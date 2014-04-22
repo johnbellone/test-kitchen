@@ -106,6 +106,7 @@ module Kitchen
         env = "env"
         env << " http_proxy=#{config[:http_proxy]}"   if config[:http_proxy]
         env << " https_proxy=#{config[:https_proxy]}" if config[:https_proxy]
+        env << " no_proxy=#{config[:no_proxy]}"       if config[:no_proxy]
 
         env == "env" ? cmd : "#{env} #{cmd}"
       end
