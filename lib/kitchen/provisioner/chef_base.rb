@@ -148,7 +148,14 @@ module Kitchen
       def default_config_rb
         root = config[:root_path]
 
-        {
+        # Support default options from kitchen.yml if they exist.
+        df = {}
+        df[:http_proxy] = config[:http_proxy] if config[:http_proxy]
+        df[:https_proxy] = config[:https_proxy] if config[:https_proxy]
+        df[:no_proxy] = config[:no_proxy] if config[:no_proxy]
+        df[:ssl_verify_mode] = config[:ssl_verify_mode].to_sym if config[:ssl_verify_mode]
+
+        df.merge({
           :node_name        => instance.name,
           :checksum_path    => "#{root}/checksums",
           :file_cache_path  => "#{root}/cache",
@@ -164,7 +171,7 @@ module Kitchen
           :client_key       => "#{root}/client.pem",
           :chef_server_url  => "http://127.0.0.1:8889",
           :encrypted_data_bag_secret => "#{root}/encrypted_data_bag_secret",
-        }
+        })
       end
 
       def prepare_json
