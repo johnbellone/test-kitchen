@@ -153,6 +153,7 @@ module Kitchen
         df[:http_proxy] = config[:http_proxy] if config[:http_proxy]
         df[:https_proxy] = config[:https_proxy] if config[:https_proxy]
         df[:no_proxy] = config[:no_proxy] if config[:no_proxy]
+        df[:ftp_proxy] = config[:ftp_proxy] if config[:ftp_proxy]
         df[:ssl_verify_mode] = config[:ssl_verify_mode].to_sym if config[:ssl_verify_mode]
 
         df.merge({
